@@ -4,13 +4,14 @@
 double factorial (double n);
 double termino (double n,double m);
 double convergencia (double num);
+double convergencia2 (double num);
 
 int main()
 {
   std::cout.precision(16);
   std::cout.setf(std::ios::scientific);
   double t,suma,n,num;
-  num=3.14159;
+  num=0.33;
   n=0;
   suma=0;
   /*do
@@ -21,7 +22,10 @@ int main()
       n+=1;
     }
     while(std::abs(t)>=(std::pow(10,-6)));*/
-  convergencia(num);
+  if(num>=0)
+    {convergencia(num);}
+  else
+    {convergencia2(num);}
 }
 
 double factorial (double n)
@@ -48,10 +52,33 @@ double convergencia (double num)
   suma=0;
   n=0;
   z=num/(std::log(2));
-  if((std::floor(z+0.5)-(z+0.5))>0.5)
+  if(((z+0.5)-std::floor(z+0.5))>0.5)
     {m=std::ceil(z+0.5);}
   else
     {m=std::floor(z+0.5);}
+  w=z-m;
+  u=w*(std::log(2));
+    do
+    { 
+      t=termino(n,u);
+      suma+=t;
+      ex=std::pow(2,m)*suma;
+      std::cout<<n<<"\t"<<ex<<"\t"<<m<<"\t"<<u<<std::endl;
+      n+=1;
+    }
+  while(std::abs(t)>=(std::pow(10,-6)));
+        
+}
+double convergencia2 (double num)
+{
+  double z,m,w,u,t,suma,n,ex;
+  suma=0;
+  n=0;
+  z=num/(std::log(2));
+  if(((z-0.5)-std::floor(z-0.5))>0.5)
+    {m=std::ceil(z-0.5);}
+  else
+    {m=std::floor(z-0.5);}
   w=z-m;
   u=w*(std::log(2));
     do
